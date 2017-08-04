@@ -1,6 +1,10 @@
 var generar = document.getElementById('ejecutar');
 var tablero = document.getElementById('tablero');
-var btnMostrar = document.getElementById("btnMostrar");
+var mostrar = document.getElementById("btnMostrar");
+var mostrarPasos = document.getElementById("btnSolucion");
+
+//Imprime en la consola la matriz final y fails
+var result = [];
 
 function printMatrix(M) {
     console.log("___________________");
@@ -9,17 +13,17 @@ function printMatrix(M) {
     console.log("___________________");
 
 }
-
+//Comprueba si se encuentran dentro del parámetro
 function check(i, j, n) {
     if (i >= 0 && j >= 0 && i < n && j < n)
         return true;
     return false;
 }
-
+//Hace que se empiece en un lugar random
 function randInt(n) {
     return Math.floor(Math.random() * n);
 }
-
+//Genera otra matriz para la heurística de solución 
 function gen_heuristic(n) {
     var M = initMatrix(n);
     var p = 1;
@@ -48,7 +52,7 @@ function shuffleArray(d) {
     }
     return d
 };
-
+//Busca y muestra la solución hasta 10000 intentos 
 function use_helper(soluciones, helper) {
     var pos = -1;
     var min = 10000;
@@ -63,7 +67,7 @@ function use_helper(soluciones, helper) {
     }
     return pos;
 }
-
+//Genera la solución y comprueba n*n para devolver Eureka y matriz o Fail y volver a empezar
 function gen_solution(M, helper, n) {
     var mov_x = [-2, -1, +1, +2, +2, +1, -1, -2];
     var mov_y = [-1, -2, -2, -1, +1, +2, +2, +1];
@@ -74,7 +78,7 @@ function gen_solution(M, helper, n) {
     M[x][y] = step;
     while (true) {
         if (step == n * n) {
-            console.log('Eureka!!!');
+            //console.log('Eureka!!!');
             return true;
         }
         var soluciones = [];
@@ -89,7 +93,7 @@ function gen_solution(M, helper, n) {
             }
         }
         if (soluciones.length == 0) {
-            console.log("fail!!");
+            //console.log("fail!!");
             break;
         }
         var idx = use_helper(soluciones, helper);
@@ -97,11 +101,12 @@ function gen_solution(M, helper, n) {
         y = soluciones[idx].y;
         step++;
         M[x][y] = step;
-        console.log("step: " + step);
+        result.push(M[x][y] = step);
+        //console.log("step: " + step);
     }
     return false;
 }
-
+//Imprime una matriz n*n con 0 en todas las posiciones
 function initMatrix(n) {
     var matrix = [];
     for (var i = 0; i < n; i++) {
@@ -114,7 +119,7 @@ function initMatrix(n) {
     return matrix;
 }
 
-generar.onclick = function () {
+function dibujarTabla() {
     tablero.innerHTML = '';
     var n = parseInt(document.getElementById('lados').value);
 
@@ -123,6 +128,7 @@ generar.onclick = function () {
         var helper = gen_heuristic(n);
         if (gen_solution(M, helper, n)) {
             printMatrix(M);
+            result = M;
             break;
         }
     }
@@ -136,7 +142,9 @@ generar.onclick = function () {
             if (i % 2 == 0 && j % 2 != 0 || i % 2 != 0 && j % 2 == 0) {
                 celda.setAttribute('class', 'negro');
             }
+            celda.setAttribute('id', M[i][j]);
             var p = document.createElement('p');
+            p.setAttribute("class", "num");
             p.innerHTML = M[i][j];
             celda.appendChild(p);
 
@@ -145,4 +153,42 @@ generar.onclick = function () {
         tabla.appendChild(fila);
     }
     tablero.appendChild(tabla);
+}
+
+//Funcionalidades de los botones
+//Botón generar solución
+
+
+generar.onclick = function () {
+    dibujarTabla();
+    var n = document.getElementsByClassName("num");
+    for (var i = 0; i < n.length; i++) {
+        n[i].innerText = "";
+    }
+}
+
+//Botón siguiente solución
+mostrar.onclick = function () {
+    dibujarTabla();
+}
+
+var contar = 1;
+mostrarPasos.onclick = function () {
+    var celdas = document.getElementsByTagName("td");
+    var n = parseInt(document.getElementById('lados').value);
+    for (var j = 0; j < celdas.length; j++) {
+        if (celdas[j].id == contar) {
+            celdas[j].innerHTML = contar;
+        }
+    }
+    if (contar > (n * n)) {
+        alert("Eureka!!");
+        dibujarTabla();
+        var num = document.getElementsByClassName("num");
+        for (var i = 0; i < num.length; i++) {
+            num[i].innerText = "";
+        }
+        contar = 0;
+    }
+    contar++;
 }
