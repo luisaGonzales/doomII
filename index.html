@@ -6,17 +6,23 @@
     <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
-<body>
-    <div class="">
-        <p>Numero de lados</p>
-        <p><input type='number' id="lados" size='4' />
-            <button id='ejecutar'>Generar Tabla</button>
-            <button id="btnMostrar">Siguiente Solución</button>
-            <button id="btnSolucion">Paso a paso</button>
-        </p>
-    </div>
-    <div id="tablero">
-    </div>
+<body align="center" id="puzzle">
+    <center>
+        <div class="intro" id="intro">
+            <h1>Puzzle</h1>
+            <h2>Bienvenido al juego del Puzzle del caballo.</h2>
+        </div>
+        <div class="game">
+            <p>Numero de lados
+                <input type='number' id="lados" size='4' />
+                <button id='ejecutar'>Generar Tabla</button><br/>
+                <button id='btnMostrar'>Siguiente Solución</button>
+                <button id="btnSolucion">Paso a Paso</button>
+            </p>
+        </div>
+        <div id="tablero">
+        </div>
+    </center>
     <script src="assets/js/javascript.js">
     </script>
 </body>
