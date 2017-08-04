@@ -9,18 +9,26 @@
 <body align="center" id="puzzle">
     <center>
         <div class="intro" id="intro">
-            <h1>Puzzle</h1>
-            <h2>Bienvenido al juego del Puzzle del caballo.</h2>
+            <h1>El Salto del Caballo</h1>
+            <h2>Bienvenido al puzzle "El Salto del Caballo"</h2> 
+        </div>
+        <div class="guide">
+            <p>Un recorrido del caballo es una secuencia de saltos, sin repetir casillas, desde una casilla inicial hasta otra
+                final, desde la cual no se puede avanzar, sin pasar por una casilla ya visitada. </p>
+            <p>A continuación, se muestran las siguientes soluciones desarrolladas por medio de la magia de la programación</p>
+            <h3>Instrucciones:</h3>
+            <p id="instrucciones">1. Ingrese el número de lados del tablero.<br/>2. Para verlo, "click" en Generar tabla.</br> 3.Eliga: Si quiere ver la solución de un tablero completo, "click" en Solución Completa; y si quiere ver paso a paso "click" en "Paso a Paso".<br/>4. Ama la programación profudamente y ¡DISFRUTA!.</p>    
         </div>
         <div class="game">
-            <p>Numero de lados
-                <input type='number' id="lados" size='4' />
+            <h3>Disfrútalo :)</h3>
+            <p>Número de lados
+                <input type='number' id="lados" />
                 <button id='ejecutar'>Generar Tabla</button><br/>
-                <button id='btnMostrar'>Siguiente Solución</button>
+                <button id='btnMostrar'>Solución Completa</button>
                 <button id="btnSolucion">Paso a Paso</button>
             </p>
         </div>
-        <div id="tablero">
+        <div id="tablero" align="center">
         </div>
     </center>
     <script src="assets/js/javascript.js">
