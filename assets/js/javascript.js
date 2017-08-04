@@ -134,6 +134,7 @@ function dibujarTabla() {
     }
 
     var tabla = document.createElement('table');
+    tabla.setAttribute("align", "center");
     tabla.border = "1";
     for (var i = 0; i < n; i++) {
         var fila = document.createElement('tr');
