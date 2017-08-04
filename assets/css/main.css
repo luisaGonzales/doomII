@@ -1,28 +1,33 @@
-@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Sedgwick+Ave+Display');
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great|Scope+One');
 #puzzle {
   top: 5%;
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 4%;
-  
+}
+.intro {
+  background-image: url(../images/bg1.png);
 }
 
 h1 {
   text-align: center;
-  font-family: 'Sedgwick Ave Display', cursive;
+  font-family: 'Fredericka the Great', cursive;
   font-size: 350%;
   color: #0a263b;
-  background-color: #d19a66;
 }
 
 h2 {
   margin: 0px;
   margin-right: 5%;
   margin-top: -2%;
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Scope One', serif;
   font-size: 150%;
   text-align: right;
   color: #0a263b;
+}
+
+h3, p{
+  font-family: 'Scope One', serif;
 }
 
 .negro {
@@ -30,13 +35,44 @@ h2 {
   color: white;
 }
 
+#lados{
+  size: 4px;
+}
+
+#instrucciones {
+  text-align: right;
+  margin-left: 50%;
+}
+
+
 td {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
 }
 
 #tablero {
   margin-right: 50%;
   margin-top: 3%;
   align-content: center;
+  background-color: white;
+}
+
+button {
+  border: none;
+  background: #0a263b;
+  color: #f2f2f2;
+  padding: 10px;
+  font-size: 50%x;
+  border-radius: 5px;
+  position: relative;
+  box-sizing: border-box;
+  padding: 10px 30px;
+  margin: 1%;
+}
+
+button:hover {
+ background: rgba(0,0,0,0);
+ color: #0a263b;
+ box-shadow: inset 0 0 0 3px #0a263b;
 }
