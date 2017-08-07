@@ -154,29 +154,67 @@ function dibujarTabla() {
         tabla.appendChild(fila);
     }
     tablero.appendChild(tabla);
+
 }
 
 //Funcionalidades de los botones
 //Botón generar solución
-
-
 generar.onclick = function () {
     dibujarTabla();
+    var input = document.getElementById("lados").value;
+    var escribir = document.getElementById("info");
+    escribir.innerHTML = input;
     var n = document.getElementsByClassName("num");
     for (var i = 0; i < n.length; i++) {
         n[i].innerText = "";
     }
+    document.getElementById("lados").value = "";
 }
 
-//Botón siguiente solución
+//Botón siguiente solución y solución completa
 mostrar.onclick = function () {
-    dibujarTabla();
+    tablero.innerHTML = '';
+    var n = parseInt(document.getElementById('info').textContent);
+
+    for (var i = 0; i < 1000; i++) {
+        var M = initMatrix(n);
+        var helper = gen_heuristic(n);
+        if (gen_solution(M, helper, n)) {
+            printMatrix(M);
+            result = M;
+            break;
+        }
+    }
+
+    var tabla = document.createElement('table');
+    tabla.setAttribute("align", "center");
+    tabla.border = "1";
+    for (var i = 0; i < n; i++) {
+        var fila = document.createElement('tr');
+        for (var j = 0; j < n; j++) {
+            var celda = document.createElement('td');
+            if (i % 2 == 0 && j % 2 != 0 || i % 2 != 0 && j % 2 == 0) {
+                celda.setAttribute('class', 'negro');
+            }
+            celda.setAttribute('id', M[i][j]);
+            var p = document.createElement('p');
+            p.setAttribute("class", "num");
+            p.innerHTML = M[i][j];
+            celda.appendChild(p);
+
+            fila.appendChild(celda);
+        }
+        tabla.appendChild(fila);
+    }
+    tablero.appendChild(tabla);
 }
 
 var contar = 1;
 mostrarPasos.onclick = function () {
     var celdas = document.getElementsByTagName("td");
-    var n = parseInt(document.getElementById('lados').value);
+    var info = document.getElementById("info");
+    var divTablero = document.getElementById("tablero");
+    var n = parseInt(document.getElementById('info').textContent);
     for (var j = 0; j < celdas.length; j++) {
         if (celdas[j].id == contar) {
             celdas[j].innerHTML = contar;
@@ -184,12 +222,15 @@ mostrarPasos.onclick = function () {
     }
     if (contar > (n * n)) {
         alert("Eureka!!");
-        dibujarTabla();
+        //dibujarTabla();
         var num = document.getElementsByClassName("num");
         for (var i = 0; i < num.length; i++) {
             num[i].innerText = "";
         }
         contar = 0;
+        info.innerHTML = "";
+        divTablero.innerHTML = "";
     }
     contar++;
+
 }
